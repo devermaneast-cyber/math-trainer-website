@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
+    <link rel="icon" href="favicon.ico"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f4f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 40px 32px;
+            border-radius: 6px;
+            box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+            max-width: 420px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 16px;
+            font-size: 28px;
+        }
+        .success {
+            color: #28a745;
+        }
+        p {
+            font-size: 18px;
+            color: #444;
+            margin: 0;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1 id="title"><span class="success">Email confirmed</span></h1>
+    <p id="message">You may now return to the application.</p>
+</div>
+
+<script>
+    const translations = {
+        en: {
+            title: "Email confirmed",
+            message: "You may now return to the application."
+        },
+        ru: {
+            title: "Почта подтверждена",
+            message: "Теперь вы можете вернуться в приложение."
+        },
+        tr: {
+            title: "E-posta doğrulandı",
+            message: "Artık uygulamaya dönebilirsiniz."
+        },
+        ky: {
+            title: "Почта тастыкталды",
+            message: "Эми колдонмого кайтып барсаңыз болот."
+        },
+        kk: {
+            title: "Пошта расталды",
+            message: "Енді қосымшаға қайта орала аласыз."
+        },
+        ja: {
+            title: "メール確認完了",
+            message: "アプリに戻って続けてください。"
+        }
+    };
+
+    // Определяем язык браузера
+    const browserLang = (navigator.language || navigator.userLanguage || "en").slice(0,2);
+
+    // Маппинг для кыргызского / казахского
+    const mapped = {
+        "ru": "ru",
+        "tr": "tr",
+        "ky": "ky",
+        "kg": "ky",
+        "kk": "kk",
+        "kz": "kk",
+        "ja": "ja",
+        "en": "en"
+    };
+
+    const lang = mapped[browserLang] || "en";
+
+    // Устанавливаем перевод
+    document.getElementById("title").innerHTML =
+        `<span class="success">${translations[lang].title}</span>`;
+    document.getElementById("message").innerText = translations[lang].message;
+</script>
+
+</body>
+</html>
