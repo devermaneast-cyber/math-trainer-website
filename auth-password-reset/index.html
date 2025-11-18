@@ -1,0 +1,76 @@
+<!-- reset-password.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="../favicon.ico"/>
+  <title>Reset Password</title>
+  <style>
+    body {
+      background: #f4f5f7;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .card {
+      background: white;
+      padding: 30px;
+      width: 360px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      background: #ff6b4a;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #msg {
+      margin-top: 10px;
+      text-align: center;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Reset Password</h2>
+    <input id="password" type="password" placeholder="New password" />
+    <button onclick="submitReset()">Submit</button>
+    <div id="msg"></div>
+  </div>
+
+  <script type="module">
+    import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+    const supabase = createClient(
+      "https://rnlwfhqidtffcxillbhu.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJubHdmaHFpZHRmZmN4aWxsYmh1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjI5NDQ2NTAsImV4cCI6MjA3ODUyMDY1MH0.ZNUcsPyr5NAmOGffXxoc4hpEj1n37-rr1sGw2Fhs_wo"
+    );
+
+    window.submitReset = async function() {
+      const password = document.getElementById("password").value;
+      const { error } = await supabase.auth.updateUser({ password });
+      document.getElementById("msg").textContent = error ? error.message : "Password updated";
+    }
+  </script>
+</body>
+</html>
